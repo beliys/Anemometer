@@ -265,7 +265,7 @@ class AnemometerModel {
         {
             $table = $this->fact_table;
         }
-        $sql = "SELECT * FROM `{$table}` WHERE `{$checksum_field_name}`={$checksum} ORDER BY `{$time_field_name}` DESC LIMIT {$limit} OFFSET {$offset}";
+        $sql = "SELECT * FROM `{$table}` WHERE `{$checksum_field_name}`='{$checksum}' ORDER BY `{$time_field_name}` DESC LIMIT {$limit} OFFSET {$offset}";
         return $this->mysqli->query($sql);
     }
 
