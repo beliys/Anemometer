@@ -1,3 +1,7 @@
 conf/config.inc.php
 *.komodoproject
 vendor/
+/.idea/
+/vagrant/.vagrant/
+.DS_Store
+/.cov/

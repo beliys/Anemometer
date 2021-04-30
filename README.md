@@ -1,7 +1,9 @@
-[![Project Status](http://opensource.box.com/badges/maintenance.svg)](http://opensource.box.com/badges)
 
 Box Anemometer
 --------------
+[![Project Status](http://opensource.box.com/badges/maintenance.svg)](http://opensource.box.com/badges)
+[![Travis](https://img.shields.io/travis/box/Anemometer.svg?maxAge=2592000)](https://travis-ci.org/box/Anemometer)
+[![Join the chat at https://gitter.im/box/Anemometer](https://badges.gitter.im/box/Anemometer.svg)](https://gitter.im/box/Anemometer?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 This is the Box Anemometer, the MySQL Slow Query Monitor.  This tool is used to analyze slow query logs collected from MySQL instances to identify problematic queries.
 
@@ -23,7 +25,7 @@ If you're just completely itching to start using this tool, here's what you need
 2.	[pt-query-digest](http://www.percona.com/doc/percona-toolkit/pt-query-digest.html).
 	*	You may as well just get the whole [Percona Toolkit](http://www.percona.com/doc/percona-toolkit) while you're at it :)
 3.	a slow query log from a MySQL server (see [The Slow Query Log](http://dev.mysql.com/doc/refman/5.5/en/slow-query-log.html) for info on getting one)
-4.	a webserver with PHP
+4.	a webserver with PHP 5.5+
 
 
 #### Setup DB ####
@@ -124,7 +126,7 @@ Phpdocs for this tool can be found in the "docs" sub-directory of the project.
 
 ### Dependencies ###
 
-This application requires an Apache webserver with PHP 5.3+ and a MySQL database that contains the data aggregated from MySQL slow query logs.
+This application requires an Apache webserver with PHP 5.5+ and a MySQL database that contains the data aggregated from MySQL slow query logs.
 
 
 ## Copyright and License
