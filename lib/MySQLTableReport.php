@@ -202,6 +202,8 @@ class MySQLTableReport {
         $this->mysqli->options(MYSQLI_OPT_CONNECT_TIMEOUT, self::$CONNECT_TIMEOUT);
         $this->mysqli->real_connect($ds['host'], $ds['user'], $ds['password'], $ds['db'], $ds['port']);
 
+        $this->mysqli->query('SET sql_mode=(SELECT REPLACE(@@sql_mode,\'ONLY_FULL_GROUP_BY\',\'\'))');
+
         if ($this->mysqli->connect_errno) {
             throw new Exception($this->mysqli->connect_error);
         }

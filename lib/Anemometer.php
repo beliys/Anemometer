@@ -368,7 +368,7 @@ class Anemometer {
         }
         else if (preg_match('/^[0-9A-Fa-f]+$/', $checksum))
         {
-            return $this->bchexdec($checksum);
+            return $checksum;
         }
         else if (strlen($checksum) == 0)
         {
@@ -605,19 +605,20 @@ class Anemometer {
      * from the session if possible.
      */
     private function get_auth_user() {
-        session_start();
-        if (array_key_exists('PHP_AUTH_USER', $_SERVER))
-        {
-            return $_SERVER['PHP_AUTH_USER'];
+      /*       session_start();
+             var_dump($_SESSION);
+             if (array_key_exists('PHP_AUTH_USER', $_SERVER))
+             {
+                 return $_SERVER['PHP_AUTH_USER'];
 
-        }
-        else if (array_key_exists('current_review_user', $_SESSION))
-        {
-            return $_SESSION['current_review_user'];
-        }
+             }
+             else if (array_key_exists('current_review_user', $_SESSION))
+             {
+                 return $_SESSION['current_review_user'];
+             }
 
-        session_write_close();
-        return null;
+             session_write_close(); */
+             return "anonymous";
     }
 
     /**
