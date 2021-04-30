@@ -22,7 +22,7 @@ function get_var($name)
     {
         if (isset($s[$name]))
         {
-            return $s[$name];
+            return str_replace(['<', '>', '"', "'"], ['&lt;', '&gt;', '&quot;', '&apos;'], $s[$name]);
         }
     }
     return null;
