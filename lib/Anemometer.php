@@ -437,18 +437,6 @@ class Anemometer {
         }
         else
         {
-            try
-            {
-                // unfortunately there is a "catchable" fatal error which isn't
-                // really catchable
-                $this->data_model->init_query_explainer($data['sample']);
-            }
-            catch ( Exception $e )
-            {
-                $data['explain_plan_error'] = $e->getMessage();
-            }
-            $data['explain_plan'] = $this->data_model->get_explain_for_sample($data['sample']);
-            $data['visual_explain'] = $this->data_model->get_visual_explain($data['explain_plan']);
             $data['query_advisor'] = $this->data_model->get_query_advisor($sample);
             $data['create_table'] = $this->data_model->get_create_table($sample);
             $data['table_status'] = $this->data_model->get_table_status($sample);

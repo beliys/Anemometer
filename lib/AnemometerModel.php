@@ -1,7 +1,5 @@
 <?php
 
-require "QueryExplain.php";
-
 /**
  * class AnemometerModel
  *
@@ -284,41 +282,6 @@ class AnemometerModel {
     }
 
     /**
-     * Create a new query explainer object for the given query sample
-     *
-     * @param array $sample     The query sample
-     */
-    public function init_query_explainer($sample) {
-        if (!is_array($sample))
-        {
-            return;
-        }
-        $this->explainer = new QueryExplain($this->conf['plugins']['explain'], $sample);
-    }
-
-    /**
-     * try to get the explain plan for a query
-     *
-     * @param array $sample     The query sample row data
-     * @return mixed        Either a string with the explain plan, an error message or null
-     */
-    public function get_explain_for_sample($sample) {
-        if (!is_array($sample))
-        {
-            return null;
-        }
-        if (!array_key_exists('plugins',$this->conf) or !is_callable($this->conf['plugins']['explain'])) {
-            return null;
-        }
-
-        if (!isset($this->explainer)) {
-            return null;
-        }
-
-        return $this->explainer->explain($sample);
-    }
-
-    /**
      * Open a two-way communication with an external script.  Used to send
      * data to the program on STDIN and collect output on STDOUT.
      *
@@ -346,23 +309,6 @@ class AnemometerModel {
             return $result;
         }
         return null;
-    }
-
-    /**
-     * invoke pt-visual-explain and get its output
-     *
-     * @param string $explain_plan      The explain plan to feed the script
-     * @return string       The visual explain output
-     */
-    public function get_visual_explain($explain_plan) {
-        if (!isset($this->conf['plugins']['visual_explain'])) {
-            return null;
-        }
-
-        if (!file_exists($this->conf['plugins']['visual_explain'])) {
-            return "can't find visual explain at " . $this->conf['plugins']['visual_explain'];
-        }
-        return $this->exec_external_script($this->conf['plugins']['visual_explain'], $explain_plan);
     }
 
     /**
