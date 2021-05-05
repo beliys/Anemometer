@@ -1,5 +1,5 @@
 <?php
-$conf['datasources']['localhost'] = array(
+$conf['datasources']['default'] = array(
 	'host'	=> 'localhost',
 	'port'	=> 3306,
 	'db'	=> 'slow_query_log',
@@ -11,4 +11,3 @@ $conf['datasources']['localhost'] = array(
 	),
 	'source_type' => 'slow_query_log'
 );
-
