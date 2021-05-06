@@ -15,6 +15,7 @@ RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
 
 # copy php configs
 COPY ./docker/fpm/modules /usr/local/etc/php/conf.d
+COPY ./docker/fpm/php-fpm.d /usr/local/etc/php-fpm.d
 
 # Copy web-app files
 COPY ./src /var/www/html
