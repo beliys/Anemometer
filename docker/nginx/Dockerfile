@@ -19,9 +19,6 @@ COPY ./src /var/www/html
 WORKDIR /var/www/html
 
 # Rewrite signal. Kubernetes always sends SIGTERM signal, nginx use SIGQUIT for graceful shutdown.
-# http://nginx.org/ru/docs/control.html
-# ENTRYPOINT ["dumb-init", "--rewrite", "15:3", "docker-nginx-entrypoint"]
-
 STOPSIGNAL SIGQUIT
 
 CMD ["nginx", "-g", "daemon off;"]

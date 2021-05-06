@@ -10,6 +10,12 @@ RUN apk add --update \
     docker-php-source delete && \
     rm -rf /var/cache/apk/*
 
+# Use the production configuration
+RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
+
+# copy php configs
+COPY ./docker/fpm/modules /usr/local/etc/php/conf.d
+
 # Copy web-app files
 COPY ./src /var/www/html
 COPY ./docker/fpm/conf /var/www/html/conf
@@ -17,9 +23,6 @@ COPY ./docker/fpm/conf /var/www/html/conf
 WORKDIR /var/www/html
 
 # Rewrite signal. Kubernetes always sends SIGTERM signal, fpm use SIGQUIT for graceful shutdown.
-# https://github.com/php/php-src/blob/6053987bc27e8dede37f437193a5cad448f99bce/sapi/fpm/fpm/fpm_events.c#L91
-# ENTRYPOINT ["dumb-init", "--rewrite", "15:3", "docker-php-entrypoint"]
-
 STOPSIGNAL SIGQUIT
 
 CMD ["php-fpm"]
