@@ -2,7 +2,7 @@
 $conf['datasources']['default'] = array(
 	'host'	=> 'localhost',
 	'port'	=> 3306,
-	'db'	=> 'slow_query_log',
+	'db'	=> 'anemometer',
 	'user'	=> 'root',
 	'password' => '',
 	'tables' => array(

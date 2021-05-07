@@ -32,16 +32,16 @@ If you're just completely itching to start using this tool, here's what you need
 
 First up, grab the anemometer code from github. Navigate to the document root of your web server and snag a copy of the Box Anemometer code.
 
-    $ git clone git://github.com/box/Anemometer.git anemometer 
+    $ git clone git://github.com/box/Anemometer.git anemometer
 Or, if you have 9418 port closed:
 
-    $ git clone https://github.com/box/Anemometer.git anemometer 
+    $ git clone https://github.com/box/Anemometer.git anemometer
 
 
 Then change your current working directory to the Anemometer directory:
 
     $ cd anemometer
-    
+
 Next, you should connect to the MySQL database you're looking to store the analysis data in and issue the following command:
 
     $ mysql -h db.example.com < install.sql
@@ -58,18 +58,18 @@ For pt-query-digest version < 2.2
     $ pt-query-digest --user=anemometer --password=superSecurePass \
                       --review h=db.example.com,D=slow_query_log,t=global_query_review \
                       --review-history h=db.example.com,D=slow_query_log,t=global_query_review_history \
-                      --no-report --limit=0% \ 
-                      --filter=" \$event->{Bytes} = length(\$event->{arg}) and \$event->{hostname}=\"$HOSTNAME\"" \ 
+                      --no-report --limit=0% \
+                      --filter=" \$event->{Bytes} = length(\$event->{arg}) and \$event->{hostname}=\"$HOSTNAME\"" \
                       /var/lib/mysql/db.example.com-slow.log
-    
+
 
 For pt-query-digest version >= 2.2
 
     $ pt-query-digest --user=anemometer --password=superSecurePass \
                       --review h=db.example.com,D=slow_query_log,t=global_query_review \
                       --history h=db.example.com,D=slow_query_log,t=global_query_review_history \
-                      --no-report --limit=0% \ 
-                      --filter=" \$event->{Bytes} = length(\$event->{arg}) and \$event->{hostname}=\"$HOSTNAME\"" \ 
+                      --no-report --limit=0% \
+                      --filter=" \$event->{Bytes} = length(\$event->{arg}) and \$event->{hostname}=\"$HOSTNAME\"" \
                       /var/lib/mysql/db.example.com-slow.log
 
 
@@ -86,7 +86,7 @@ TODO: explain what the options above are doing.
 Now, navigate to the document root of your web server and copy the sample config so you can edit it:
 
     $ cd anemometer/conf
-    $ cp sample.config.inc.php config.inc.php 
+    $ cp sample.config.inc.php config.inc.php
 
 
 The sample config explains every setting you may want to change in it.  At the very least, make sure you set the Datasource to the MySQL database you're storing the analyzed digest information in:
@@ -110,7 +110,7 @@ In addition, the "explain" plugin is enabled by default in the current release a
         'explain'       =>      function ($sample) {
             $conn['user'] = 'anemometer';
             $conn['password'] = 'superSecurePass';
-            
+
             return $conn;
         },
     );

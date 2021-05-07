@@ -15,7 +15,7 @@ services:
       - ./backups/:/backups/
     environment:
       - MYSQL_ROOT_PASSWORD=passw0rd
-      - MYSQL_DATABASE=slow_query_log
+      - MYSQL_DATABASE=anemometer
       - MYSQL_USER=anemometer
       - MYSQL_PASSWORD=passw0rd
 
@@ -31,7 +31,7 @@ services:
       - mysql
     environment:
       - ANEMOMETER_MYSQL_HOST=anemometer_mysql
-      - ANEMOMETER_MYSQL_DB=slow_query_log
+      - ANEMOMETER_MYSQL_DB=anemometer
       - ANEMOMETER_MYSQL_USER=anemometer
       - ANEMOMETER_MYSQL_PASS=passw0rd
 

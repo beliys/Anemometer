@@ -1,6 +1,6 @@
 -- MariaDB dump 10.19  Distrib 10.5.9-MariaDB, for Linux (x86_64)
 --
--- Host: 127.0.0.1    Database: slow_query_log
+-- Host: 127.0.0.1    Database: anemometer
 -- ------------------------------------------------------
 -- Server version	5.7.34
 
