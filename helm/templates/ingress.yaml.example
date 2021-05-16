@@ -1,0 +1,23 @@
+apiVersion: {{$.Values.ingress_api}}
+kind: Ingress
+metadata:
+  name: {{.Values.serviceName}}-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/service-upstream: "true"
+spec:
+  tls:
+{{- range $domain := .Values.ingress.domains }}
+  - hosts:
+    - {{ $domain.hostname | quote }}
+    secretName: {{ $domain.secretName }}
+{{- end }}
+  rules:
+{{- range $domain := .Values.ingress.domains }}
+    - host: {{ $domain.hostname | quote }}
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: {{$.Values.serviceName}}
+              servicePort: 80
+{{- end }}

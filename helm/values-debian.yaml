@@ -1,0 +1,8 @@
+serviceName: "anemometer"
+replicas: 2
+
+fpm:
+  image: anemometer/anemometer-fpm:latest
+
+nginx:
+  image: anemometer/anemometer-fpm:latest

@@ -1,0 +1,19 @@
+serviceName: "anemometer"
+replicas: 2
+
+fpm:
+  pullPolicy: "IfNotPresent"
+
+nginx:
+  pullPolicy: "IfNotPresent"
+
+# # If you want also deploy ingress, than:
+# # 1) Uncomment and edit next block
+# # 2) Make secret with ssl certificate
+# # 3) Rename ingress.yaml.example to ingress.yaml
+#
+# ingress:
+#   domains:
+#     - hostname: anemometer.local
+#       tls: true
+#       secretName: https-anemometer
