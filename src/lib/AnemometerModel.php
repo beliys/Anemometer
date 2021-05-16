@@ -7,7 +7,8 @@
  * and selecting and updating queries from the query_review table
  *
  *
- * @author Gavin Towey <gavin@box.com> and Geoff Anderson <geoff@box.com>
+ * @author Gavin Towey <gavin@box.com>
+ * @author Geoff Anderson <geoff@box.com>
  * @created 2012-01-01
  * @license Apache 2.0 license.  See LICENSE document for more info
  */

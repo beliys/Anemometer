@@ -1,0 +1,27 @@
+FROM nginx:1.19.10
+MAINTAINER beliys "https://github.com/beliys/Anemometer"
+
+# Install dependencies
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+    bash \
+    nginx && \
+    mkdir -p /etc/nginx && \
+    mkdir -p /run/nginx && \
+    mkdir -p /var/www/html && \
+    apt-get clean autoclean && \
+    apt-get autoremove --yes && \
+    rm -rf /var/lib/{apt,dpkg,cache,log}/
+
+# Copy config file
+COPY ./docker/nginx/templates /etc/nginx/templates
+
+# Copy web-app files
+COPY ./src /var/www/html
+
+WORKDIR /var/www/html
+
+# Rewrite signal. Kubernetes always sends SIGTERM signal, nginx use SIGQUIT for graceful shutdown.
+STOPSIGNAL SIGQUIT
+
+CMD ["nginx", "-g", "daemon off;"]

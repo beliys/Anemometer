@@ -1,9 +1,33 @@
+dist: focal
 language: php
 php:
-  - '5.5'
-  - '5.6'
-  - '7.0'
-  - hhvm
-  - nightly
+  - '8.0'
 
-script: make test
+branches:
+  only:
+    - master
+
+stages:
+  - test
+#  - deploy
+
+services: docker
+
+before_script: composer install
+script: vendor/phpunit/phpunit/phpunit
+
+# Setup jobs per platform
+jobs:
+  include:
+    # alpine
+    - stage: test
+      script:
+        - docker build -t "anemometer-fpm-tests:0.1.0-alpine" --build-arg "PREPARE_TESTS=true" -f docker/fpm/Dockerfile_alpine .
+        - docker run "anemometer-fpm-tests:0.1.0-alpine" /var/www/html/vendor/phpunit/phpunit/phpunit
+    # debian
+    - script:
+      - docker build -t "anemometer-fpm-tests:0.1.0" --build-arg "PREPARE_TESTS=true" -f docker/fpm/Dockerfile_debian .
+      - docker run "anemometer-fpm-tests:0.1.0" /var/www/html/vendor/phpunit/phpunit/phpunit
+    - stage: deploy
+      script:
+        - echo "Start deploying..."

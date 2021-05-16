@@ -14,10 +14,10 @@
   	<script src="js/jquery-1.8.3.min.js"></script>
 	<script src="js/jquery-ui-1.9.2.custom.min.js"></script>
     <link href="css/bootstrap.css" rel="stylesheet">
-    
+
     <!-- addon timepicker to date -->
     <script src="js/jquery-ui-timepicker-addon.js"></script>
-    
+
     <style>
       /* css for timepicker */
       .ui-timepicker-div .ui-widget-header { margin-bottom: 8px; }
@@ -34,10 +34,10 @@
 	pre.prettyprint { font-size: 90%; !important; }
 	.nowrap { white-space: pre; overflow: scroll; }
     </style>
-  
+
     <!-- typahead -->
     <script src="js/bootstrap-typeahead.js"></script>
-    
+
     <!-- google pretty print -->
     <link href="css/prettify.css" rel="stylesheet" type="text/css">
     <script src="js/prettify.js" type="text/javascript"></script>
@@ -49,22 +49,22 @@
     <script src="js/bootstrap-tab.js"></script>
     <script src="js/bootstrap-combobox.js"></script>
     <link href="css/bootstrap-combobox.css" media="screen" rel="stylesheet" type="text/css">
-    
-    
+
+
     <style>
       body {
         padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
       }
-      
+
       .navbar .brand{
       	padding: 0 20px !important; /* prevent brand from expanding navbar height */
       }
-      
+
       .navbar .brand img{ /* center logo vertically in navbar */
       	position: relative;
       	top: 6px;
       }
-      
+
       #quicksearch{
       	margin-bottom: 0; /* prevent quicksearch form from expanding navbar height */
       }

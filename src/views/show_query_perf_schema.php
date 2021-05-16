@@ -6,16 +6,16 @@
 </div>
 
 <hr>
-      
+
 	<div class="row">
 		<div class="span12">
 			<strong>Fingerprint</strong><br>
 			<pre class="prettyprint lang-sql"><?php echo $row[$fingerprint_field_name]; ?></pre>
 		</div>
 	</div>
-	<hr>    
-    
-        
+	<hr>
+
+
 		<?php if (isset($create_table) and $create_table != '') { ?>
             <div class="accordion-group">
               <div class="accordion-heading">
@@ -61,7 +61,7 @@
 		prettyPrint();
 
         <?php if ($source_type != 'performance_schema') { ?>
-        
+
 		$('#graph').on('hidden', function () {
 			el = document.getElementById('graph-btn');
 			el.innerHTML = '<i class="icon-plus"></i> Show Graph Options'

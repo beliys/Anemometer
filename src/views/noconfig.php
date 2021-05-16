@@ -2,14 +2,14 @@
 </div>
 <div class="row">
 	<div class="span3">
-		
+
 		<ul class="thumbnails">
 			<li class="span2"><img src="img/ane_spash.png" alt=""></li>
 			<li class="span2"><img src="img/box.png" alt=""></li>
 			<li class="span2"><img src="img/clouds.png" alt=""></li>
 			</ul>
 	</div>
-	
+
 	<div class="span9">
 		<div class="hero-unit">
 		  <h1>SQL Anemometer</h1>

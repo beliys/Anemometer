@@ -22,8 +22,8 @@
 				<span class="add-on"><i class="icon-calendar" id="dp"></i></span>
 			</div>
 		</div>
-		
-    
+
+
 
 		<div class="span4">
 			To<br>
@@ -51,7 +51,7 @@
 				<option value="<?php echo $f ?>" <?php if (isset($table_fields_selected) and in_array($f, $table_fields_selected )) { echo "SELECTED"; } ?>><?php echo $f ?></option>
 			<?php } ?>
 			</optgroup>
-			
+
 			<?php foreach (array_keys($table_fields) as $table)  { ?>
 				<optgroup label="<?php echo $table; ?>">
 					<?php foreach ($table_fields[$table] as $f)  { ?>
@@ -71,7 +71,7 @@
 			<?php } ?>
 		</select>
 	</div>
-	
+
 	<div class="span4">
 		Filter By Host<br>
 		<select name="dimension-<?php echo $hostname_field_name; ?>" class="span3 combobox">
@@ -80,7 +80,7 @@
 				<option value="<?php echo $h ?>" <?php if (get_var('dimension-'.$hostname_field_name) == $h ) { echo "SELECTED"; } ?>><?php echo $h ?></option>
 			<?php } ?>
 		</select><br>
-		
+
 		Group By<br>
 		<input name="fact-group" class="span4 typeahead" value="<?php echo get_var('fact-group') ?>" data-provide="typeahead"><br><br>
 		Order By<br>
@@ -92,15 +92,15 @@
 		<center>
 			<input type="submit" class="btn-primary btn-large" name="submit" value="Search">
 		</center>
-		
+
 	</div>
-	
+
 	<div class="span4">
 		<!--
 		Extra Fields<br>
 		<textarea name="extra_fields" class="span4" rows="6"><?php echo get_var('extra_fields') ?></textarea><br><br>
 		-->
-		
+
 		Where<br>
 		<textarea name="fact-where" class="span4" rows="6"><?php echo get_var('fact-where') ?></textarea><br><br>
 		Query Sample Contains<br>
@@ -112,11 +112,11 @@
 				<option value="<?php echo $rt ?>" <?php if (get_var('fact-reviewed_status') == $rt) { echo ' SELECTED '; } ?>><?php echo $rt ?></option>
 		<?php } ?>
 		</select><br>
-		
+
 		Checksum<br>
 		<input name="fact-<?php echo $checksum_field_name ?>" class="span4 typeahead" value="<?php echo get_var('fact-'.$checksum_field_name) ?>"><br><br>
-		
+
 	</div>
-	
+
 </div>
 <hr>

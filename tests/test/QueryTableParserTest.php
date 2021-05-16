@@ -2,19 +2,19 @@
 
 require_once __DIR__.'/../lib/QueryTableParser.php';
 
-class TestQueryTableParser extends PHPUnit_Framework_TestCase
+class TestQueryTableParser extends PHPUnit\Framework\TestCase
 {
     /**
      * @var QueryTableParser
      */
     protected $_QueryTableParser;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->_QueryTableParser = new QueryTableParser();
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
         unset($this->_QueryTableParser);
     }

@@ -1,6 +1,7 @@
 FROM php:8.0.5-fpm-alpine
 MAINTAINER beliys "https://github.com/beliys/Anemometer"
 
+ARG PREPARE_TESTS=false
 ARG PHP_EXTENSIONS="mysqli bcmath opcache"
 
 # Install dependencies
@@ -20,6 +21,19 @@ COPY ./docker/fpm/php-fpm.d /usr/local/etc/php-fpm.d
 # Copy web-app files
 COPY ./src /var/www/html
 COPY ./docker/fpm/conf /var/www/html/conf
+
+# Copy tests folder
+COPY ./tests /tests
+
+RUN if [ "${PREPARE_TESTS}" = "true" ]; then \
+      cp -rf /tests/* /var/www/html && \
+			cd /var/www/html && \
+			curl -sS https://getcomposer.org/composer.phar -o /usr/local/bin/composer && \
+			chmod +x /usr/local/bin/composer && \
+			/usr/local/bin/composer install; \
+	  else \
+		  rm -rf /tests; \
+		fi
 
 WORKDIR /var/www/html
 

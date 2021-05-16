@@ -39,14 +39,14 @@ clean-test: ## remove test and coverage artifacts
 
 
 test: ## run tests quickly with the default PHP
-	phpunit
+	vendor/phpunit/phpunit/phpunit
 
-phpunit: vendor/phpunit
+phpunit: vendor/phpunit/phpunit/phpunit
 
 vendor/phpunit: vendor/phpunit.phar
 	echo $$EXTRACT_PHPUNIT | php
 
-vendor/phpunit.phar: vendor 
+vendor/phpunit.phar: vendor
 	wget -O vendor/phpunit.phar https://phar.phpunit.de/phpunit.phar
 
 vendor:

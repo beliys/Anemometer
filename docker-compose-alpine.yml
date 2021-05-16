@@ -1,0 +1,56 @@
+version: '3'
+
+services:
+  mysql:
+    container_name: anemometer-mysql
+    build:
+      context: .
+      dockerfile: docker/mysql/Dockerfile
+    command: mysqld --sql-mode="STRICT_ALL_TABLES,NO_AUTO_CREATE_USER" --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci --explicit-defaults-for-timestamp=ON --max_allowed_packet=32M
+    ports:
+      - "13306:3306"
+    networks:
+      - mysql
+    volumes:
+      - ./backups/:/backups/
+    environment:
+      - MYSQL_ROOT_PASSWORD=passw0rd
+      - MYSQL_DATABASE=anemometer
+      - MYSQL_USER=anemometer
+      - MYSQL_PASSWORD=passw0rd
+
+  php-fpm:
+    container_name: anemometer-fpm
+    build:
+      context: .
+      dockerfile: docker/fpm/Dockerfile_alpine
+    networks:
+      - mysql
+      - php-fpm
+    depends_on:
+      - mysql
+    environment:
+      - ANEMOMETER_MYSQL_HOST=anemometer-mysql
+      - ANEMOMETER_MYSQL_DB=anemometer
+      - ANEMOMETER_MYSQL_USER=anemometer
+      - ANEMOMETER_MYSQL_PASS=passw0rd
+
+  nginx:
+    container_name: anemometer-nginx
+    build:
+      context: .
+      dockerfile: docker/nginx/Dockerfile_alpine
+    ports:
+      - "10080:80"
+    networks:
+      php-fpm: {}
+      nginx: {}
+    depends_on:
+      - php-fpm
+    environment:
+      - NGINX_FASTCGI_PASS=anemometer-fpm:9000
+
+networks:
+  mysql: {}
+  php-fpm: {}
+  nginx: {}

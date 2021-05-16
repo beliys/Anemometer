@@ -1,14 +1,14 @@
 <?php
 require_once 'lib/QueryRewrite.php';
 
-class TestQueryRewrite extends PHPUnit_Framework_TestCase {
+class TestQueryRewrite extends PHPUnit\Framework\TestCase {
     protected $_QueryRewrite = null;
 
-    public function setUp() {
+    public function setUp(): void {
         $this->_QueryRewrite = new QueryRewrite();
     }
 
-    public function tearDown() {
+    public function tearDown(): void {
         unset($this->_QueryRewrite);
     }
 
@@ -83,11 +83,11 @@ LIMIT 1
 
     public function testSelectBug3() {
         $sql                     = "INSERT INTO tbl_old(
-SELECT * 
+SELECT *
 FROM tbl
 WHERE id =123 )";
         $expectedType            = QueryRewrite::INSERTSELECT;
-        $expectedSelect          = "SELECT *  FROM tbl WHERE id =123";
+        $expectedSelect          = "SELECT * FROM tbl WHERE id =123";
         $expectedExplain         = "EXPLAIN $expectedSelect";
         $expectedExtendedExplain = "EXPLAIN EXTENDED $expectedSelect";
         $this->_QueryRewrite->setQuery($sql);

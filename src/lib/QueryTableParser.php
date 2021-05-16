@@ -53,7 +53,7 @@ class QueryTableParser {
             if (in_array(strtolower($token), $this->table_tokens)) {
 
                 $table = $this->get_next_token();
-                
+
                 #Handles old style joins
                 if (preg_match("/,/", $table)) {
                     while (preg_match("/,/", $table)) {

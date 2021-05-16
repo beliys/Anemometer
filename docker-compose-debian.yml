@@ -2,7 +2,7 @@ version: '3'
 
 services:
   mysql:
-    container_name: anemometer_mysql
+    container_name: anemometer-mysql
     build:
       context: .
       dockerfile: docker/mysql/Dockerfile
@@ -20,26 +20,26 @@ services:
       - MYSQL_PASSWORD=passw0rd
 
   php-fpm:
-    container_name: anemometer_fpm
+    container_name: anemometer-fpm
     build:
       context: .
-      dockerfile: docker/fpm/Dockerfile
+      dockerfile: docker/fpm/Dockerfile_debian
     networks:
       - mysql
       - php-fpm
     depends_on:
       - mysql
     environment:
-      - ANEMOMETER_MYSQL_HOST=anemometer_mysql
+      - ANEMOMETER_MYSQL_HOST=anemometer-mysql
       - ANEMOMETER_MYSQL_DB=anemometer
       - ANEMOMETER_MYSQL_USER=anemometer
       - ANEMOMETER_MYSQL_PASS=passw0rd
 
   nginx:
-    container_name: anemometer_nginx
+    container_name: anemometer-nginx
     build:
       context: .
-      dockerfile: docker/nginx/Dockerfile
+      dockerfile: docker/nginx/Dockerfile_debian
     ports:
       - "10080:80"
     networks:
@@ -48,7 +48,7 @@ services:
     depends_on:
       - php-fpm
     environment:
-      - NGINX_FASTCGI_PASS=anemometer_fpm:9000
+      - NGINX_FASTCGI_PASS=anemometer-fpm:9000
 
 networks:
   mysql: {}
