@@ -7,7 +7,7 @@ stages:
 
 services: docker
 
-# Setup jobs per platform
+# Setup jobs
 jobs:
   include:
     # alpine
@@ -17,12 +17,12 @@ jobs:
       script:
         - if [ -n "${TRAVIS_TAG}" ]; then export TAG="${TRAVIS_TAG}"; else export TAG="latest"; fi
         - echo "TAG=${TAG}"
-        - docker build -t "anemometer-fpm-tests:${TRAVIS_TAG}-alpine" --build-arg "PREPARE_TESTS=true" -f docker/fpm/Dockerfile_alpine .
-        - docker run "anemometer-fpm-tests:${TRAVIS_TAG}-alpine" /var/www/html/vendor/phpunit/phpunit/phpunit
+        - docker build -t "anemometer-fpm-tests:${TAG}-alpine" --build-arg "PREPARE_TESTS=true" -f docker/fpm/Dockerfile_alpine .
+        - docker run "anemometer-fpm-tests:${TAG}-alpine" /var/www/html/vendor/phpunit/phpunit/phpunit
     # debian
     - script:
-        - docker build -t "anemometer-fpm-tests:${TRAVIS_TAG}" --build-arg "PREPARE_TESTS=true" -f docker/fpm/Dockerfile_debian .
-        - docker run "anemometer-fpm-tests:${TRAVIS_TAG}" /var/www/html/vendor/phpunit/phpunit/phpunit
+        - docker build -t "anemometer-fpm-tests:${TAG}" --build-arg "PREPARE_TESTS=true" -f docker/fpm/Dockerfile_debian .
+        - docker run "anemometer-fpm-tests:${TAG}" /var/www/html/vendor/phpunit/phpunit/phpunit
     - stage: deploy
       on:
         tags: true
