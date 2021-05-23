@@ -33,8 +33,8 @@ RUN if [ "${PREPARE_TESTS}" = "true" ]; then \
       cp -rf /tests/* /var/www/html && \
       cd /var/www/html && \
       curl -sS https://getcomposer.org/composer.phar -o /usr/local/bin/composer && \
-      chmod +x /usr/local/bin/composer; \
-      # /usr/local/bin/composer install; \
+      chmod +x /usr/local/bin/composer && \
+      /usr/local/bin/composer install; \
     else \
       rm -rf /tests; \
     fi
