@@ -15,7 +15,7 @@ jobs:
       on:
         tags: true
       script:
-        - if [ -n "${TRAVIS_TAG}" ]; then export TAG="${TRAVIS_TAG}"; else export TAG="latest"; fi)
+        - if [ -n "${TRAVIS_TAG}" ]; then export TAG="${TRAVIS_TAG}"; else export TAG="latest"; fi
         - echo "TAG=${TAG}"
         - docker build -t "anemometer-fpm-tests:${TRAVIS_TAG}-alpine" --build-arg "PREPARE_TESTS=true" -f docker/fpm/Dockerfile_alpine .
         - docker run "anemometer-fpm-tests:${TRAVIS_TAG}-alpine" /var/www/html/vendor/phpunit/phpunit/phpunit
