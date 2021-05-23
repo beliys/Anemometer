@@ -20,7 +20,6 @@ jobs:
         - docker build -t "anemometer-fpm-tests:current" --build-arg "PREPARE_TESTS=true" -f docker/fpm/Dockerfile_debian .
         - docker run "anemometer-fpm-tests:current" /var/www/html/vendor/phpunit/phpunit/phpunit
     - stage: deploy
-      on:
-        tags: true
+      if: tag IS present
       script:
         - echo "Start deploying anemometer-fpm:${TRAVIS_TAG}..."
