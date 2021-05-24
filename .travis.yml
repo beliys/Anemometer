@@ -26,51 +26,47 @@ jobs:
       - docker build -t "anemometer/anemometer-fpm:${TRAVIS_TAG}-alpine" -f docker/fpm/Dockerfile_alpine .
       - docker tag "anemometer/anemometer-fpm:${TRAVIS_TAG}-alpine" "anemometer/anemometer-fpm:latest-alpine"
       if: tag IS present
+      before_deploy:
+        - echo "${DOCKERHUB_TOKEN}" | docker login -u="${DOCKERHUB_USER}" --password-stdin;
+      deploy:
+        provider: script
+        script:
+          - docker push "anemometer/anemometer-fpm:${TRAVIS_TAG}-alpine"
+          - docker push "anemometer/anemometer-fpm:latest-alpine"
+        on:
+          tags: true
     # anemometer-fpm:debian
     - script:
       - docker build -t "anemometer/anemometer-fpm:${TRAVIS_TAG}" -f docker/fpm/Dockerfile_debian .
       - docker tag "anemometer/anemometer-fpm:${TRAVIS_TAG}" "anemometer/anemometer-fpm:latest"
       if: tag IS present
+      before_deploy:
+        - echo "${DOCKERHUB_TOKEN}" | docker login -u="${DOCKERHUB_USER}" --password-stdin;
+      deploy:
+        provider: script
+        script:
+          - docker push "anemometer/anemometer-fpm:${TRAVIS_TAG}-alpine"
+          - docker push "anemometer/anemometer-fpm:latest-alpine"
+        on:
+          tags: true
     # anemometer-nginx:alpine
     - script:
       - docker build -t "anemometer/anemometer-nginx:${TRAVIS_TAG}-alpine" -f docker/nginx/Dockerfile_alpine .
       - docker tag "anemometer/anemometer-nginx:${TRAVIS_TAG}-alpine" "anemometer/anemometer-nginx:latest-alpine"
       if: tag IS present
+      before_deploy:
+        - echo "${DOCKERHUB_TOKEN}" | docker login -u="${DOCKERHUB_USER}" --password-stdin;
     # anemometer-nginx:debian
     - script:
       - docker build -t "anemometer/anemometer-nginx:${TRAVIS_TAG}" -f docker/nginx/Dockerfile_alpine .
       - docker tag "anemometer/anemometer-nginx:${TRAVIS_TAG}" "anemometer/anemometer-nginx:latest"
       if: tag IS present
-
-before_deploy:
-  - echo "${DOCKERHUB_TOKEN}" | docker login -u="${DOCKERHUB_USER}" --password-stdin;
-
-deploy:
- # Deploy anemometer-fpm:latest-alpine
- - provider: script
-   script:
-     - docker push "anemometer/anemometer-fpm:${TRAVIS_TAG}-alpine"
-     - docker push "anemometer/anemometer-fpm:latest-alpine"
-   on:
-     tags: true
- # Deploy anemometer-fpm:debian
- - provider: script
-   script:
-     - docker push "anemometer/anemometer-fpm:${TRAVIS_TAG}"
-     - docker push "anemometer/anemometer-fpm:latest"
-   on:
-     tags: true
- # Deploy anemometer-nginx:latest-alpine
- - provider: script
-   script:
-     - docker push "anemometer/anemometer-nginx:${TRAVIS_TAG}-alpine"
-     - docker push "anemometer/anemometer-nginx:latest-alpine"
-   on:
-     tags: true
- # Deploy anemometer-nginx:debian
- - provider: script
-   script:
-     - docker push "anemometer/anemometer-nginx:${TRAVIS_TAG}"
-     - docker push "anemometer/anemometer-nginx:latest"
-   on:
-     tags: true
+      before_deploy:
+        - echo "${DOCKERHUB_TOKEN}" | docker login -u="${DOCKERHUB_USER}" --password-stdin;
+      deploy:
+        provider: script
+        script:
+          - docker push "anemometer/anemometer-fpm:${TRAVIS_TAG}-alpine"
+          - docker push "anemometer/anemometer-fpm:latest-alpine"
+        on:
+          tags: true
