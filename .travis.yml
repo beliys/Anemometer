@@ -1,6 +1,6 @@
 dist: focal
 os: linux
-language: minimal
+language: shell
 
 stages:
   - test
