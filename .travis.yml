@@ -50,7 +50,8 @@ jobs:
         on:
           tags: true
     # anemometer-nginx:alpine
-    - script: docker build -t "anemometer/anemometer-nginx:${TRAVIS_TAG}-alpine" -f docker/nginx/Dockerfile_alpine .
+    - script:
+      - docker build -t "anemometer/anemometer-nginx:${TRAVIS_TAG}-alpine" -f docker/nginx/Dockerfile_alpine .
       - docker tag "anemometer/anemometer-nginx:${TRAVIS_TAG}-alpine" "anemometer/anemometer-nginx:latest-alpine"
       if: tag IS present
       before_deploy:
