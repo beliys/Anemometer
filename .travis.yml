@@ -30,9 +30,7 @@ jobs:
         - echo "${DOCKERHUB_TOKEN}" | docker login -u="${DOCKERHUB_USER}" --password-stdin;
       deploy:
         provider: script
-        script:
-          - docker push "anemometer/anemometer-fpm:${TRAVIS_TAG}-alpine"
-          - docker push "anemometer/anemometer-fpm:latest-alpine"
+        script: docker push "anemometer/anemometer-fpm:${TRAVIS_TAG}-alpine" && docker push "anemometer/anemometer-fpm:latest-alpine"
         on:
           tags: true
     # anemometer-fpm:debian
@@ -44,9 +42,7 @@ jobs:
         - echo "${DOCKERHUB_TOKEN}" | docker login -u="${DOCKERHUB_USER}" --password-stdin;
       deploy:
         provider: script
-        script:
-          - docker push "anemometer/anemometer-fpm:${TRAVIS_TAG}"
-          - docker push "anemometer/anemometer-fpm:latest"
+        script: docker push "anemometer/anemometer-fpm:${TRAVIS_TAG}" && docker push "anemometer/anemometer-fpm:latest"
         on:
           tags: true
     # anemometer-nginx:alpine
@@ -58,9 +54,7 @@ jobs:
         - echo "${DOCKERHUB_TOKEN}" | docker login -u="${DOCKERHUB_USER}" --password-stdin;
       deploy:
         provider: script
-        script:
-          - docker push "anemometer/anemometer-nginx:${TRAVIS_TAG}-alpine"
-          - docker push "anemometer/anemometer-nginx:latest-alpine"
+        script: docker push "anemometer/anemometer-nginx:${TRAVIS_TAG}-alpine" && docker push "anemometer/anemometer-nginx:latest-alpine"
         on:
           tags: true
     # anemometer-nginx:debian
@@ -72,8 +66,6 @@ jobs:
         - echo "${DOCKERHUB_TOKEN}" | docker login -u="${DOCKERHUB_USER}" --password-stdin;
       deploy:
         provider: script
-        script:
-          - docker push "anemometer/anemometer-nginx:${TRAVIS_TAG}"
-          - docker push "anemometer/anemometer-nginx:latest"
+        script: docker push "anemometer/anemometer-nginx:${TRAVIS_TAG}" && docker push "anemometer/anemometer-nginx:latest"
         on:
           tags: true
