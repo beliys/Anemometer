@@ -43,7 +43,7 @@ jobs:
       if: tag IS present
 
 before_deploy:
-  - docker login -u="${DOCKERHUB_USER}" -p="${DOCKERHUB_TOKEN}"
+  - echo "${DOCKERHUB_TOKEN}" | docker login -u="${DOCKERHUB_USER}" --password-stdin;
 
 deploy:
  # Deploy anemometer-fpm:latest-alpine
