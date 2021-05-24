@@ -38,39 +38,39 @@ jobs:
       - docker build -t "anemometer/anemometer-nginx:${TRAVIS_TAG}" -f docker/nginx/Dockerfile_alpine .
       - docker tag "anemometer/anemometer-nginx:${TRAVIS_TAG}" "anemometer/anemometer-nginx:latest"
 
-  before_deploy:
-    - docker login -u="${DOCKERHUB_USER}" -p="${DOCKERHUB_TOKEN}"
+before_deploy:
+  - docker login -u="${DOCKERHUB_USER}" -p="${DOCKERHUB_TOKEN}"
 
-  deploy:
-   # Deploy anemometer-fpm:latest-alpine
-   - provider: script
-     script:
-       - docker push "anemometer/anemometer-fpm:${TRAVIS_TAG}-alpine"
-       - docker push "anemometer/anemometer-fpm:latest-alpine"
-     skip_cleanup: true
-     on:
-       tags: true
-   # Deploy anemometer-fpm:debian
-   - provider: script
-     script:
-       - docker push "anemometer/anemometer-fpm:${TRAVIS_TAG}"
-       - docker push "anemometer/anemometer-fpm:latest"
-     skip_cleanup: true
-     on:
-       tags: true
-   # Deploy anemometer-nginx:latest-alpine
-   - provider: script
-     script:
-       - docker push "anemometer/anemometer-nginx:${TRAVIS_TAG}-alpine"
-       - docker push "anemometer/anemometer-nginx:latest-alpine"
-     skip_cleanup: true
-     on:
-       tags: true
-   # Deploy anemometer-nginx:debian
-   - provider: script
-     script:
-       - docker push "anemometer/anemometer-nginx:${TRAVIS_TAG}"
-       - docker push "anemometer/anemometer-nginx:latest"
-     skip_cleanup: true
-     on:
-       tags: true
+deploy:
+ # Deploy anemometer-fpm:latest-alpine
+ - provider: script
+   script:
+     - docker push "anemometer/anemometer-fpm:${TRAVIS_TAG}-alpine"
+     - docker push "anemometer/anemometer-fpm:latest-alpine"
+   skip_cleanup: true
+   on:
+     tags: true
+ # Deploy anemometer-fpm:debian
+ - provider: script
+   script:
+     - docker push "anemometer/anemometer-fpm:${TRAVIS_TAG}"
+     - docker push "anemometer/anemometer-fpm:latest"
+   skip_cleanup: true
+   on:
+     tags: true
+ # Deploy anemometer-nginx:latest-alpine
+ - provider: script
+   script:
+     - docker push "anemometer/anemometer-nginx:${TRAVIS_TAG}-alpine"
+     - docker push "anemometer/anemometer-nginx:latest-alpine"
+   skip_cleanup: true
+   on:
+     tags: true
+ # Deploy anemometer-nginx:debian
+ - provider: script
+   script:
+     - docker push "anemometer/anemometer-nginx:${TRAVIS_TAG}"
+     - docker push "anemometer/anemometer-nginx:latest"
+   skip_cleanup: true
+   on:
+     tags: true
